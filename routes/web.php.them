@@ -1,0 +1,12 @@
+<?php
+// THÊM đoạn dưới vào CUỐI file routes/web.php (không copy dòng <?php này).
+// Thêm dòng này lên đầu file cùng các dòng use khác:
+//     use App\Http\Controllers\PhongController;
+
+Route::middleware(['auth', 'role:chu_tro'])
+    ->prefix('chu-tro')
+    ->name('chutro.')
+    ->group(function () {
+        Route::resource('phong', PhongController::class)->except('show');
+        Route::delete('anh-phong/{anhPhong}', [PhongController::class, 'xoaAnh'])->name('phong.xoa-anh');
+    });
